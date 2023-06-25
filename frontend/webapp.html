@@ -1,20 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebApp Fuel</title>
+	<style>
+		.form-container {
+			max-width: 500px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+
+		.form-field {
+			margin-bottom: 10px;
+		}
+
+		.form-field label {
+			display: block;
+			margin-bottom: 5px;
+			font-weight: bold;
+		}
+
+		.form-field input[type="text"],
+		.form-field select {
+			width: 100%;
+			padding: 5px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+
+		.form-submit {
+			margin-top: 10px;
+		}
+
+		.form-submit input[type="submit"] {
+			padding: 10px 20px;
+			background-color: #4CAF50;
+			border: none;
+			color: white;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+	</style>
 </head>
-<h1>Login</h1>
 <body>
-    <form action="login.php" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        
-        <input type="submit" value="Log In">
-      </form>
+	<div class="form-container">
+		<form action="submit_form.php" method="POST">
+			<div class="form-field">
+				<label for="full-name">Full Name:</label>
+				<input type="text" id="full-name" name="full-name" maxlength="50" required>
+			</div>
+			<div class="form-field">
+				<label for="address1">Address 1:</label>
+				<input type="text" id="address1" name="address1" maxlength="100" required>
+			</div>
+			<div class="form-field">
+				<label for="address2">Address 2:</label>
+				<input type="text" id="address2" name="address2" maxlength="100">
+			</div>
+			<div class="form-field">
+				<label for="city">City:</label>
+				<input type="text" id="city" name="city" maxlength="100" required>
+			</div>
+			<div class="form-field">
+				<label for="state">State:</label>
+				<select id="state" name="state" required>
+					<option value="">Select State</option>
+					<option value="AL">Alabama</option>
+					<option value="AK">Alaska</option>
+					<option value="AZ">Arizona</option>
+					<!-- Add more state options here -->
+				</select>
+			</div>
+			<div class="form-field">
+				<label for="zipcode">Zipcode:</label>
+				<input type="text" id="zipcode" name="zipcode" pattern="[0-9]{5,9}" title="Enter a valid zipcode with at least 5 characters" required>
+			</div>
+			<div class="form-submit">
+				<input type="submit" value="Submit">
+			</div>
+		</form>
+	</div>
 </body>
 </html>
