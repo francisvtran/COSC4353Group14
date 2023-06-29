@@ -7,17 +7,14 @@
 			margin: 0 auto;
 			padding: 20px;
 		}
-
 		.form-field {
 			margin-bottom: 10px;
 		}
-
 		.form-field label {
 			display: block;
 			margin-bottom: 5px;
 			font-weight: bold;
 		}
-
 		.form-field input[type="text"],
 		.form-field select {
 			width: 100%;
@@ -25,11 +22,9 @@
 			border: 1px solid #ccc;
 			border-radius: 4px;
 		}
-
 		.form-submit {
 			margin-top: 10px;
 		}
-
 		.form-submit input[type="submit"] {
 			padding: 10px 20px;
 			background-color: #4CAF50;
@@ -49,6 +44,7 @@
 			</div>
 			<div class="form-field">
 				<label for="delivery-address">Delivery Address:</label>
+				<input type="text" id="delivery-address" name="delivery-address" maxlength="100" required>
 				<input type="text" id="delivery-address" name="delivery-address" maxlength="100" readonly>
 			</div>
 			<div class="form-field">
@@ -57,6 +53,7 @@
 			</div>
 			<div class="form-field">
 				<label for="suggested-ppg">Suggested Price per gallon:</label>
+				<input type="text" id="suggested-ppg" name="suggested-ppg" maxlength="100" required>
 				<input type="text" id="suggested-ppg" name="suggested-ppg" maxlength="100" readonly>
 			</div>
 			<div class="form-field">
