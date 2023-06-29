@@ -8,15 +8,15 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "name": "Open login.html",
-            "file": "c:\\Users\\chimp\\OneDrive\\Personal\\Documents\\GitHub\\COSC4353Group14\\frontend\\login.html"
+            "name": "Open registration.html",
+            "file": "C:\\Users\\julie\\Documents\\GitHub\\chrome\\COSC4353Group14\\frontend\\registration.html"
         },
 
         {
             "type": "chrome",
             "request": "launch",
             "name": "Open webapp.html",
-            "file": "c:\\Users\\chimp\\OneDrive\\Personal\\Documents\\GitHub\\COSC4353Group14\\frontend\\webapp.html"
+            "file": "C:\\Users\\julie\\Documents\\GitHub\\chrome\\COSC4353Group14\\frontend\\webapp.html"
         }
     ]
 }
