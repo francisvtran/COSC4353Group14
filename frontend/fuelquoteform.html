@@ -49,7 +49,7 @@
 			</div>
 			<div class="form-field">
 				<label for="delivery-address">Delivery Address:</label>
-				<input type="text" id="delivery-address" name="delivery-address" maxlength="100" required>
+				<input type="text" id="delivery-address" name="delivery-address" maxlength="100" readonly>
 			</div>
 			<div class="form-field">
 				<label for="delivery-date">Delivery Date:</label>
@@ -57,21 +57,11 @@
 			</div>
 			<div class="form-field">
 				<label for="suggested-ppg">Suggested Price per gallon:</label>
-				<input type="text" id="suggested-ppg" name="suggested-ppg" maxlength="100" required>
+				<input type="text" id="suggested-ppg" name="suggested-ppg" maxlength="100" readonly>
 			</div>
 			<div class="form-field">
-				<label for="state">State:</label>
-				<select id="state" name="state" required>
-					<option value="">Select State</option>
-					<option value="AL">Alabama</option>
-					<option value="AK">Alaska</option>
-					<option value="AZ">Arizona</option>
-					<!-- Add more state options here -->
-				</select>
-			</div>
-			<div class="form-field">
-				<label for="zipcode">Zipcode:</label>
-				<input type="text" id="zipcode" name="zipcode" pattern="[0-9]{5,9}" title="Enter a valid zipcode with at least 5 characters" required>
+				<label for="amount-due">Total Amount Due:</label>
+				<input type="text" id="amount-due" name="amount-due" readonly>
 			</div>
 			<div class="form-submit">
 				<input type="submit" value="Submit">
