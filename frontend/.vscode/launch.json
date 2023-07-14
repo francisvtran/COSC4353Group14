@@ -5,11 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Chrome",
+            "name": "LaunchChrome",
             "request": "launch",
             "type": "chrome",
             "name": "Open registration.html",
-            "file": "C:\\Users\\julie\\Documents\\GitHub\\chrome\\COSC4353Group14\\frontend\\registration.html"
+            "file": "C:\\Users\\julie\\Documents\\GitHub\\chrome\\COSC4353Group14\\frontend\\index.html"
         },
 
         {
