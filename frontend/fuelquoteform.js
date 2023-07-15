@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     .then(data => {
       // Set form field values using the retrieved data
-      document.querySelector('#gallons-requested').value = data.fullName;
-      document.querySelector('#delivery-address').value = data.address1;
-      document.querySelector('#delivery-date').value = data.address2;
-      document.querySelector('#suggested-ppg').value = data.city;
-      document.querySelector('#amount-due').value = data.state;
+      document.querySelector('#gallons-requested').value = data.galReq;
+      document.querySelector('#delivery-address').value = data.delAddress;
+      document.querySelector('#delivery-date').value = data.delDate;
+      document.querySelector('#suggested-ppg').value = data.suggPPG;
+      document.querySelector('#amount-due').value = data.amtDue;
     })
     .catch(error => {
       console.error('Error:', error);
