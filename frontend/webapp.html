@@ -39,11 +39,11 @@
 			cursor: pointer;
 		}
 	</style>
+	<script defer src="webapp.js"></script>
 </head>
 <body>
 	<div class="form-container">
-		<h2>Client Profile Page</h2>
-		<form action="fuelquotehistory.html" method="POST">
+		<form>
 			<div class="form-field">
 				<label for="full-name">Full Name:</label>
 				<input type="text" id="full-name" name="full-name" maxlength="50" required>
@@ -120,7 +120,7 @@
 				<input type="text" id="zipcode" name="zipcode" pattern="[0-9]{5,9}" title="Enter a valid zipcode with at least 5 characters" required>
 			</div>
 			<div class="form-submit">
-				<input type="submit" value="Submit">
+				<button class="submitBTN" type="submit" value="Submit">Submit</button>
 			</div>
 		</form>
 	</div>
