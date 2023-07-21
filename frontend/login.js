@@ -1,3 +1,19 @@
+const mysql = require('mysql');
+const express = require('express')
+
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "root123",
+  database: "nodejs"
+});
+
+connection.connect(function(error){
+  if(error) throw error
+    else console.log('Connection established sucessfully')
+});
+
+/*
 const registeredUsers = [];
 const form = document.getElementById('form');
 const email = document.getElementById('email');
@@ -65,3 +81,4 @@ const validateInputs = () => {
         form.submit();
     }
     };
+    */
