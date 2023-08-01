@@ -9,11 +9,11 @@ const connection = mysql.createConnection({
 });
 
 connection.connect(function(error){
-  if(error) throw error
+    if(error) throw error
     else console.log('Connection established sucessfully')
 });
 
-/*
+
 const registeredUsers = [];
 const form = document.getElementById('form');
 const email = document.getElementById('email');
@@ -81,4 +81,4 @@ const validateInputs = () => {
         form.submit();
     }
     };
-    */
+    
