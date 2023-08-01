@@ -5,9 +5,9 @@ const mysql = require('mysql');
 // connect to the database
 const connection = mysql.createConnection({
   host: "localhost",
+  database: "nodejs",
   user: "root",
-  password: "root123",
-  database: "nodejs"
+  password: "root123"
 });
 
 connection.connect(function(error){
@@ -20,7 +20,30 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/exampleFormData', (req, res) => {
+  const sqlQuery = "SELECT * FROM Client LIMIT 1;";
 
+  // Make a query to the database retrieving 1 row to use as the prepopulated values
+  connection.query(sqlQuery, (error, results) => {
+    if (error) {
+      console.error("Error fetching data:", error);
+      return res.status(500).send("Server error");
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send("No data found");
+    }
+
+    // Extract the data from the first index of the results
+    const data = results[0];
+    console.log(results[0]);
+
+    // Send the data as the response
+    res.status(200).json(data);
+  });
+});
+
+/*
 // Handle post request for client post page submit
 app.post('/ClientPostPageSubmit', (req, res) => {
   // Handle validations
@@ -80,9 +103,33 @@ app.post('/ClientPostPageSubmit', (req, res) => {
   // Passed all validations checks
   return res.status(500).send("Couldn't insert data into database");
 });
+*/
+
+app.post('/ClientPostPageSubmit', (req, res) => {
+  // Handle validations
+  const fullName = req.body.fullName;
+  const address1 = req.body.address1;
+  const address2 = req.body.address2;
+  const city = req.body.city;
+  const state = req.body.state;
+  const zipcode = req.body.zipcode;
+
+  const sqlQuery = "INSERT INTO Client (fullName, address1, address2, city, state, zipcode) VALUES (?, ?, ?, ?, ?, ?);";
+  const values = [fullName, address1, address2, city, state, zipcode];
+
+  connection.query(sqlQuery, values, (error, result) => {
+    if (error) {
+      console.error("Error inserting data:", error);
+      return res.status(500).send("Error while saving data");
+    }
+
+    console.log("New client row inserted, ID:", result.insertId);
+    return res.status(200).send("Clean form submitted and data saved!");
+  });
+});
 
 // Get request for grabbing prepopulated form values for the form field
-app.get('/exampleFormData', (req, res) => {
+/*app.get('/exampleFormData', (req, res) => {
   const sqlQuery = "SELECT * FROM Client LIMIT 1;";
 
   let data;
@@ -100,6 +147,7 @@ app.get('/exampleFormData', (req, res) => {
     // Extract the data from the first index of the results
     data = results[0];
   });
+  
   // Hardcoded form values
   // const data = {
   //   fullName: "John Doe",
@@ -110,7 +158,8 @@ app.get('/exampleFormData', (req, res) => {
   //   zipcode: '44805',
   // };
   res.status(200).send(data);
-})
+})*/
+
 
 const port = 3000;
 app.listen(port, ()=> {
