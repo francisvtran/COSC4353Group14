@@ -70,7 +70,7 @@ const validateInputs = () => {
         setSuccess(password2);
     }
 
-    if (document.querySelectorAll('.success').length === 2) {
+    if (document.querySelectorAll('.success').length == 4) {
         const newUser = {
             username: 'juliecruz',
             email: 'juliecruzb26@gmail.com',

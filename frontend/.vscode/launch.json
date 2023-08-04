@@ -5,7 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "LaunchChrome",
             "request": "launch",
             "type": "chrome",
             "name": "Open registration.html",
