@@ -44,6 +44,57 @@ app.get('/exampleFormData', (req, res) => {
   });
 });
 
+// Define the source and target tables
+const sourceTable = 'Client';
+const targetTable = 'fuelquoteform';
+
+// Define the columns to copy
+const sourceColumns = ['address1', 'address2'];
+const targetColumns = ['deliveryAddress'];
+
+// Construct the SQL query
+const sqlQuery = `
+  INSERT INTO ${targetTable} (${targetColumns.join(', ')})
+  SELECT ${sourceColumns.join(', ')}
+  FROM ${sourceTable}
+  WHERE condition;
+`;
+
+// Execute the query
+connection.query(sqlQuery, function(error, results, fields) {
+  if (error) {
+    console.error('Error copying data:', error);
+  } else {
+    console.log('Data copied successfully');
+  }
+
+    // Close the database connection
+    connection.end();
+  });
+  
+app.get('/fuelQuoteFormData', (req, res) => {
+  const sqlQuery = "SELECT * FROM fuelquoteform LIMIT 1;";
+
+  // Make a query to the database retrieving 1 row to use as the prepopulated values
+  connection.query(sqlQuery, (error, results) => {
+    if (error) {
+      console.error("Error fetching data:", error);
+      return res.status(500).send("Server error");
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send("No data found");
+    }
+
+    // Extract the data from the first index of the results
+    const data = results[0];
+    console.log(results[0]);
+
+    // Send the data as the response
+    res.status(200).json(data);
+  });
+});
+
 /*
 // Handle post request for client post page submit
 app.post('/ClientPostPageSubmit', (req, res) => {
@@ -114,6 +165,38 @@ app.post('/ClientPostPageSubmit', (req, res) => {
   const city = req.body.city;
   const state = req.body.state;
   const zipcode = req.body.zipcode;
+
+  // Make sure full name is within 50 characters and exists
+  if (!fullName || fullName.length > 50){
+    return res.status(400).send("Invalid request (Full name)")
+  }
+
+  // Make sure address exists and is within than 100 characters
+  if (!address1 || address1.length > 100){
+    return res.status(400).send("Invalid request (Address 1)")
+  }
+
+  // If address exist, check to see if its within than 100 characters
+  if (address2){
+    if (address2.length > 100){
+      return res.status(400).send("Invalid request (Address 2)")
+    }
+  }
+
+  // Make sure city exists and is within than 100 characters
+  if (!city || city.length > 100){
+    return res.status(400).send("Invalid request (City)")
+  }
+
+  // Make sure state exists
+  if (!state){
+    return res.status(400).send("Invalid request (State)")
+  }
+
+  // Make sure zipcode exists and is within 5-9 charcters
+  if (!zipcode || zipcode.length < 5 || zipcode.length > 9){
+    return res.status(400).send("Invalid request (Zipcode)")
+  }
 
   const sqlQuery = "INSERT INTO Client (fullName, address1, address2, city, state, zipcode) VALUES (?, ?, ?, ?, ?, ?);";
   const values = [fullName, address1, address2, city, state, zipcode];

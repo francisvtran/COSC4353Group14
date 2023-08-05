@@ -16,5 +16,15 @@
     "jsonwebtoken": "^9.0.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.5.2"
+  },
+  "devDependencies": {
+    "jest": "^29.6.2"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": ["json", "lcov", "text", "clover"],
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": ["**/*.js"]
   }
+  
 }

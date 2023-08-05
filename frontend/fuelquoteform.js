@@ -3,7 +3,7 @@ const form = document.querySelector('form');
 // Populate fields from the backend
 document.addEventListener('DOMContentLoaded', () => {
   // Fetch data from the backend
-  fetch('http://localhost:3000/exampleFormData')
+  fetch('http://localhost:3000/fuelQuoteFormData')
     .then(response => response.json())
     .then(data => {
       // Set form field values using the retrieved data
