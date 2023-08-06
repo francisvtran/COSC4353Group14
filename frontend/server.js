@@ -46,7 +46,7 @@ app.get('/exampleFormData', (req, res) => {
 
 
 app.get('/getMostRecentEntry', (req, res) => {
-const sqlQuery = 'SELECT address1 FROM Client ORDER BY client_id DESC LIMIT 1';
+const sqlQuery = 'SELECT * FROM Client ORDER BY entry_id DESC LIMIT 1';
   connection.query(sqlQuery, function(error, results) {
     if (error) {
       console.error('Error fetching most recent entry:', error);
@@ -64,24 +64,7 @@ const sqlQuery = 'SELECT address1 FROM Client ORDER BY client_id DESC LIMIT 1';
 })
 });
 
-app.get('/getMostRecentEntry', (req, res) => {
-  const sqlQuery = 'SELECT state FROM Client ORDER BY client_id DESC LIMIT 1';
-    connection.query(sqlQuery, function(error, results) {
-      if (error) {
-        console.error('Error fetching most recent entry:', error);
-        return;
-      }
-  
-      if (results.length === 0) {
-        console.log('No entries found');
-        return;
-      }
-  
-      const mostRecentEntry = results[0];
-      console.log(mostRecentEntry)
-      res.status(200).send(mostRecentEntry);
-  })
-  });
+
 
 app.get('/fuelQuoteFormData', (req, res) => {
   const sqlQuery = "SELECT * FROM fuelquoteform LIMIT 1;";
@@ -225,6 +208,31 @@ app.post('/ClientPostPageSubmit', (req, res) => {
     console.log(result);
 
     console.log("New client row inserted, ID:", result.insertId);
+    return res.status(200).send("Clean form submitted and data saved!");
+  });
+});
+
+app.post('/fuelQuoteFormPageSubmit', (req, res) => {
+  console.log("fuelquoteform", req.body);
+
+  const gallonsReq = req.body.gallonsRequested;
+  const deliveryAddress = req.body.deliveryAddress;
+  const deliveryDate = req.body.deliveryDate;
+  const suggPPG = req.body.suggestedPPG;
+  const totalDue = req.body.totalDue;
+
+  const sqlQuery = "INSERT INTO fuelquoteform (gallonsReq, deliveryAddress, deliveryDate, suggPPG, totalDue) VALUES (?, ?, ?, ?, ?);";
+  const values = [gallonsReq, deliveryAddress, deliveryDate, suggPPG, totalDue];
+
+  connection.query(sqlQuery, values, (error, result) => {
+    if (error) {
+      console.error("Error inserting data:", error);
+      return res.status(500).send("Error while saving data");
+    }
+
+    console.log(result);
+
+    console.log("New fuelquoteform row inserted, ID:", result.insertId);
     return res.status(200).send("Clean form submitted and data saved!");
   });
 });

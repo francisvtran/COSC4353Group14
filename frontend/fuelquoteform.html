@@ -37,14 +37,20 @@
 			cursor: pointer;
 		}
         label{color:white}
+		.form-quote input[type="button"] {
+			padding: 10px 20px;
+			background-color: rgb(238, 193, 14);
+			border: none;
+			color: white;
+			border-radius: 4px;
+			cursor: pointer;
+		}
 	</style>
 </head>
 <body>
 	<div class="form-container">
-        
-    
+        <form>
 		<h2 style="color:yellow;">Fuel Quote Form</h2>
-		<form action="submit.php" method="POST">
 			<div class="form-field">
 				<label for="gallons-requested">Gallons Requested:</label>
 				<input type="number" id="gallonsReq" name="gallons-requested" maxlength="15" required>
@@ -66,11 +72,14 @@
 				<input type="text" id="totalDue" name="amount-due" readonly>
 			</div>
 			<div class="form-submit">
-					<a href="fuelquotehistory.html"></a>
-				<input type="submit" value="Submit">
+					<a href="fuelquotehistory.html">
+				<input type="submit">
+					</a>
+			</div>
+			<div class="form-quote">
+				<input type="button" id= "getQuote" value="Get Quote">
 			</div>
 		</form>
-    
 	</div>
 </body>
 </html>
