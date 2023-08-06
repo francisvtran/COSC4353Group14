@@ -38,7 +38,7 @@
 		}
         label{color:white}
 	</style>
-	<script defer src="webapp.js"></script>
+	<script src="webapp.js" defer></script>
 </head>
 <body>
 	<div class="form-container">
@@ -120,7 +120,9 @@
 				<input type="text" id="zipcode" name="zipcode" pattern="[0-9]{5,9}" title="Enter a valid zipcode with at least 5 characters" required>
 			</div>
 			<div class="form-submit">
-				<a href="fuelquoteform.html"><button type="submit">Submit</button></a>
+					<a href="fuelquoteform.html">
+				<input type="submit">
+					</a>
 			</div>
 		</form>
 	</div>

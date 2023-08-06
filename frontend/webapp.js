@@ -48,5 +48,6 @@ form.addEventListener('submit', (event) => {
     .catch(error => {
       console.error('Error:', error);
     });
+    window.location.href = "fuelquoteform.html";
 });
 
