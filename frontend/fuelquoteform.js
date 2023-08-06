@@ -1,5 +1,6 @@
 const form = document.querySelector('form');
 
+
 // Populate fields from the backend
 document.addEventListener('DOMContentLoaded', () => {
   // Fetch data from the backend
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     .then(data => {
       // Set form field values using the retrieved data
-      document.querySelector('#deliveryAddress').value = data.address1;
+      document.getElementById('deliveryAddress').value = data.address1;
     })
     .catch(error => {
       console.error('Error:', error);
