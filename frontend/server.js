@@ -64,6 +64,25 @@ const sqlQuery = 'SELECT address1 FROM Client ORDER BY client_id DESC LIMIT 1';
 })
 });
 
+app.get('/getMostRecentEntry', (req, res) => {
+  const sqlQuery = 'SELECT state FROM Client ORDER BY client_id DESC LIMIT 1';
+    connection.query(sqlQuery, function(error, results) {
+      if (error) {
+        console.error('Error fetching most recent entry:', error);
+        return;
+      }
+  
+      if (results.length === 0) {
+        console.log('No entries found');
+        return;
+      }
+  
+      const mostRecentEntry = results[0];
+      console.log(mostRecentEntry)
+      res.status(200).send(mostRecentEntry);
+  })
+  });
+
 app.get('/fuelQuoteFormData', (req, res) => {
   const sqlQuery = "SELECT * FROM fuelquoteform LIMIT 1;";
 
