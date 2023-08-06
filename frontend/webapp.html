@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<head>
+		<link rel="stylesheet" href="./style.css">
 	<style>
+        
 		.form-container {
 			max-width: 500px;
 			margin: 0 auto;
 			padding: 20px;
 		}
-
 		.form-field {
 			margin-bottom: 10px;
 		}
-
 		.form-field label {
 			display: block;
 			margin-bottom: 5px;
 			font-weight: bold;
 		}
-
 		.form-field input[type="text"],
 		.form-field select {
 			width: 100%;
@@ -25,24 +25,24 @@
 			border: 1px solid #ccc;
 			border-radius: 4px;
 		}
-
 		.form-submit {
 			margin-top: 10px;
 		}
-
 		.form-submit input[type="submit"] {
 			padding: 10px 20px;
-			background-color: #4CAF50;
+			background-color: rgb(41, 57, 194);
 			border: none;
 			color: white;
 			border-radius: 4px;
 			cursor: pointer;
 		}
+        label{color:white}
 	</style>
 	<script defer src="webapp.js"></script>
 </head>
 <body>
 	<div class="form-container">
+		<h2 style="color:yellow;">Account Info</h2>
 		<form>
 			<div class="form-field">
 				<label for="full-name">Full Name:</label>
@@ -120,9 +120,7 @@
 				<input type="text" id="zipcode" name="zipcode" pattern="[0-9]{5,9}" title="Enter a valid zipcode with at least 5 characters" required>
 			</div>
 			<div class="form-submit">
-					<a href = fuelquoteform.html>
-				<input type = "submit">
-					</a>
+				<a href="fuelquoteform.html"><button type="submit">Submit</button></a>
 			</div>
 		</form>
 	</div>
