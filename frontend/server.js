@@ -44,34 +44,26 @@ app.get('/exampleFormData', (req, res) => {
   });
 });
 
-// Define the source and target tables
-const sourceTable = 'Client';
-const targetTable = 'fuelquoteform';
 
-// Define the columns to copy
-const sourceColumns = ['address1', 'address2'];
-const targetColumns = ['deliveryAddress'];
+app.get('/getMostRecentEntry', (req, res) => {
+const sqlQuery = 'SELECT address1 FROM Client ORDER BY client_id DESC LIMIT 1';
+  connection.query(sqlQuery, function(error, results) {
+    if (error) {
+      console.error('Error fetching most recent entry:', error);
+      return;
+    }
 
-// Construct the SQL query
-const sqlQuery = `
-  INSERT INTO ${targetTable} (${targetColumns.join(', ')})
-  SELECT ${sourceColumns.join(', ')}
-  FROM ${sourceTable}
-  WHERE condition;
-`;
+    if (results.length === 0) {
+      console.log('No entries found');
+      return;
+    }
 
-// Execute the query
-connection.query(sqlQuery, function(error, results, fields) {
-  if (error) {
-    console.error('Error copying data:', error);
-  } else {
-    console.log('Data copied successfully');
-  }
+    const mostRecentEntry = results[0];
+    console.log(mostRecentEntry)
+    res.status(200).send(mostRecentEntry);
+})
+});
 
-    // Close the database connection
-    connection.end();
-  });
-  
 app.get('/fuelQuoteFormData', (req, res) => {
   const sqlQuery = "SELECT * FROM fuelquoteform LIMIT 1;";
 
@@ -94,6 +86,8 @@ app.get('/fuelQuoteFormData', (req, res) => {
     res.status(200).json(data);
   });
 });
+
+
 
 /*
 // Handle post request for client post page submit
@@ -201,11 +195,15 @@ app.post('/ClientPostPageSubmit', (req, res) => {
   const sqlQuery = "INSERT INTO Client (fullName, address1, address2, city, state, zipcode) VALUES (?, ?, ?, ?, ?, ?);";
   const values = [fullName, address1, address2, city, state, zipcode];
 
+  const sqlQuery2 = "INSERT INTO fuelquoteform (deliveryAddress);";
+
   connection.query(sqlQuery, values, (error, result) => {
     if (error) {
       console.error("Error inserting data:", error);
       return res.status(500).send("Error while saving data");
     }
+
+    console.log(result);
 
     console.log("New client row inserted, ID:", result.insertId);
     return res.status(200).send("Clean form submitted and data saved!");

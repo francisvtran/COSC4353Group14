@@ -3,15 +3,11 @@ const form = document.querySelector('form');
 // Populate fields from the backend
 document.addEventListener('DOMContentLoaded', () => {
   // Fetch data from the backend
-  fetch('http://localhost:3000/fuelQuoteFormData')
+  fetch('http://localhost:3000/getMostRecentEntry')
     .then(response => response.json())
     .then(data => {
       // Set form field values using the retrieved data
-      document.querySelector('#gallons-requested').value = data.galReq;
-      document.querySelector('#delivery-address').value = data.delAddress;
-      document.querySelector('#delivery-date').value = data.delDate;
-      document.querySelector('#suggested-ppg').value = data.suggPPG;
-      document.querySelector('#amount-due').value = data.amtDue;
+      document.querySelector('#deliveryAddress').value = data.address1;
     })
     .catch(error => {
       console.error('Error:', error);
