@@ -7,23 +7,52 @@ const CompanyProfit = 0.10;
 const gallons = document.getElementById('gallonsReq');
 const history = true;
 
+/*
 form.addEventListener('submit', e => {
   GetPrice();
 });
+*/
+
+
 
 // Populate fields from the backend
 document.addEventListener('DOMContentLoaded', () => {
+  let userData;
   // Fetch data from the backend
   fetch('http://localhost:3000/getMostRecentEntry')
     .then(response => response.json())
     .then(data => {
+      userData = data;
       // Set form field values using the retrieved data
       document.getElementById('deliveryAddress').value = data.address1;
     })
     .catch(error => {
       console.error('Error:', error);
     });
+    const getQuoteButton = document.getElementById('getQuote');
+
+  getQuoteButton.addEventListener('click', () => {
+  const gallonsInput = document.getElementById('gallonsReq');
+  const totalDueInput = document.getElementById('totalDue');
+
+  console.log(gallonsInput.value);
+  console.log(totalDueInput.value);
+
+  // Ensure the value is parsed as a number
+  const gallonsRequested = parseFloat(gallonsInput.value);
+
+  // Check if the input is a valid number
+  if (isNaN(gallonsRequested) || gallonsRequested <= 0) {
+    totalDueInput.value = 'Invalid input';
+    return;
+  }
+
+  const totalValue = GetPrice(gallonsInput.value, userData);
+  totalDueInput.value = totalAmount; // Display total with two decimal places
 });
+
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
   // Fetch data from the backend
@@ -39,48 +68,56 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-const GetPrice = () => {
-  if(state == 'TX'){
-    const StatePercent = 0.2;
+const GetPrice = (gallonsInput, userData) => {
+  let StatePercent;
+  let GallonsRequested;
+  let priceHistory;
+  if(userData.state == 'TX'){
+    StatePercent = 0.2;
   }
   else{
-    const StatePercent = 0.4;
+    StatePercent = 0.4;
   }
 
-  if (gallons > 1000) {
-    const GallonsRequested = .2;
+  if (gallonsInput > 1000) {
+    GallonsRequested = .2;
   }
   else{
-    const GallonsRequested = .3;
+    GallonsRequested = .3;
   }
 
   if(history){
-    const priceHistory = .1
+    priceHistory = .1
   }
   else{
-    const priceHistory = 0.0
+    priceHistory = 0.0
   }
 
   const margin = 1.50 * (StatePercent - priceHistory + GallonsRequested + CompanyProfit)
   const suggestedPrice = 1.50 + margin;
-  totalAmount = GallonsRequested * suggestedPrice;
+  totalAmount = gallonsInput * suggestedPrice;
 
+  document.getElementById('suggPPG').value = suggestedPrice; 
+  return totalAmount;
 };
 
+
 form.addEventListener('submit', (event) => {
+  console.log("submitting")
+
   event.preventDefault();
 
   // Prepare data to send to the backend
   const data = {
-    fullName: document.querySelector('#gallons-requested').value,
-    address1: document.querySelector('#delivery-address').value,
-    address2: document.querySelector('#delivery-date').value,
-    city: document.querySelector('#suggested-ppg').value,
-    state: document.querySelector('#amount-due').value,
+    gallonsRequested: document.querySelector('#gallonsReq').value,
+    deliveryAddress: document.querySelector('#deliveryAddress').value,
+    deliveryDate: document.querySelector('#deliveryDate').value,
+    suggestedPPG: document.querySelector('#suggPPG').value,
+    totalDue: document.querySelector('#totalDue').value,
   };
 
   // Make a post request to the backend
-  fetch('http://localhost:3000/ClientPostPageSubmit', {
+  fetch('http://localhost:3000/fuelQuoteFormPageSubmit', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
