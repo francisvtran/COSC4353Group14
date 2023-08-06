@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <h2>Fuel Quote History</h2>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./fuelquotehistory.css">
+
+    <style>
+        table, th, td{
+            border: 1px solid black;
+            text-align: center;
+        }
+        table
+        { 
+            margin-left: auto;
+            margin-right: auto;
+        }
+        a:link, a:visited {
+            background-color: rgb(41, 57, 194);
+            color: white;
+            padding: 15px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        a:hover, a:active {
+            background-color: red;
+        }
+    </style>
 </head>
+
 <body>
-<table>
-    <h2>Fuel Quote History</h2>
-    <tr>
-      <th>Gallons Requested</th>
-      <th>Delivery Address</th>
-      <th>Delivery Date</th>
-      <th>Suggested Price</th>
-      <th>Total Amount Due</th>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td>9931 Ramblin Rd</td>
-      <td>Febuary 10</td>
-      <td>$1.50</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td>  </td>
-      <td>  </td>
-    </tr>
-  </table>
+    <table class="styled-table">
+        <thead>
+            <th colspan="5">FUEL QUOTE HISTORY</th>
+            <tr>
+                <th>Gallons Requested</th>
+                <th>Delivery Address</th>
+                <th>Delivery Date</th>
+                <th>Suggested Price</th>
+                <th>Total Amount Due</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="active-row">
+                <td>10</td>
+                <td>9931 Ramblin Rd</td>
+                <td>Febuary 10</td>
+                <td>$1.50</td>
+                <td></td>
+            </tr>
+            <!-- and so on... -->
+        </tbody>
+    </table>
+    
   <p><a href="fuelquoteform.html">Go here to fill out a Fuel Quote form</a></p>
 <body>
-<html>
 
+<html>
