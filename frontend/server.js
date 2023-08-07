@@ -139,10 +139,14 @@ app.post('/loginUser', (req, res) => {
 
     if (results.length === 0) {
       console.log("failed");
-      return res.status(200).send("failed");
+      return res.status(200).json({
+        message: "failed"
+      });
     }
     else{
-    return res.status(200).send("success");
+      return res.status(200).json({
+        message: "success"
+      });
     }
   })
   });

@@ -8,7 +8,6 @@ const password = document.getElementById('password');
     //enterData();
     const validated = validateInputs();
     if(validated) {
-        console.log("success");
         const data = {
             email: email.value,
             password: password.value
@@ -26,8 +25,11 @@ const password = document.getElementById('password');
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                if(data === "failed") {
+                if(data.message === "failed") {
                     window.location.href = "login.html";
+                }
+                else {
+                    window.location.href = "fuelquoteform.html";
                 }
             })
             .catch(error => {
@@ -80,9 +82,6 @@ const validateInputs = () => {
         setSuccess(password)
     }
 
-    if (document.querySelectorAll('.success').length === 2) {
-        form.submit();
-    }
     return true;
     };
     
