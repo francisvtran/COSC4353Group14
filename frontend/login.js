@@ -3,17 +3,37 @@ const form = document.getElementById('form');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 
-const newUser = {
-    username: 'juliecruz',
-    email: 'juliecruzb26@gmail.com',
-    password: 'Bailey2000'
-  };
-
-form.addEventListener('submit', e => {
-    registeredUsers.push(newUser);
+  form.addEventListener('submit', e => {
     e.preventDefault();
     //enterData();
-    validateInputs();
+    const validated = validateInputs();
+    if(validated) {
+        console.log("success");
+        const data = {
+            email: email.value,
+            password: password.value
+        }
+
+        console.log(data);
+
+        fetch('http://localhost:3000/loginUser', {
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if(data === "failed") {
+                    window.location.href = "login.html";
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }
 });
 
 const setError = (element, message) => {
@@ -45,18 +65,17 @@ const validateInputs = () => {
 
     if(emailValue === '') {
         setError(email, 'Email is required');
+        return false;
     } else if (!isValidEmail(emailValue)) {
         setError(email, 'Provide a valid email address');
-    } else if (emailValue != 'juliecruzb26@gmail.com'){
-        setError(email, 'Invalid email')
+        return false;
     } else{
         setSuccess(email)
     }
 
     if(passwordValue === '') {
         setError(password, 'Password is required');
-    } else if(passwordValue != 'Bailey2000'){
-        setError(password, 'Incorrect Password')
+        return false;
     } else{
         setSuccess(password)
     }
@@ -64,5 +83,6 @@ const validateInputs = () => {
     if (document.querySelectorAll('.success').length === 2) {
         form.submit();
     }
+    return true;
     };
     

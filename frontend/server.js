@@ -37,7 +37,6 @@ app.get('/exampleFormData', (req, res) => {
 
     // Extract the data from the first index of the results
     const data = results[0];
-    console.log(results[0]);
 
     // Send the data as the response
     res.status(200).json(data);
@@ -122,6 +121,30 @@ app.post('/newUserRegister', (req, res) => {
     console.log("New client row inserted, ID:", result.insertId);
     return res.status(200).json({ message: "Clean form submitted and data saved!" }); 
   });
+  });
+
+  //login endpoint
+app.post('/loginUser', (req, res) => { 
+  const email = req.body.email;
+  const password = req.body.password;
+  const sqlQuery = 'SELECT * FROM loginuser WHERE user_email = ? AND user_pass = ?';
+
+  connection.query(sqlQuery, [email, password], function(error, results) {
+    if (error) {
+      console.error('Error fetching data:', error);
+      res.status(500).send('Server error');
+      return;
+    }
+    console.log("results:", results);
+
+    if (results.length === 0) {
+      console.log("failed");
+      return res.status(200).send("failed");
+    }
+    else{
+    return res.status(200).send("success");
+    }
+  })
   });
 
 
