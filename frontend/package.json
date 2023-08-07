@@ -4,7 +4,8 @@
   "description": "",
   "main": "webapp.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -18,13 +19,21 @@
     "mysql2": "^3.5.2"
   },
   "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.4.0",
     "jest": "^29.6.2"
   },
   "jest": {
     "collectCoverage": true,
-    "coverageReporters": ["json", "lcov", "text", "clover"],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "clover"
+    ],
     "coverageDirectory": "coverage",
-    "collectCoverageFrom": ["**/*.js"]
+    "collectCoverageFrom": [
+      "**/*.js"
+    ]
   }
-  
 }
