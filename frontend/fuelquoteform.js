@@ -103,6 +103,8 @@ const GetPrice = (gallonsInput, userData) => {
 
 
 form.addEventListener('submit', (event) => {
+  localStorage.setItem('address', document.querySelector('#deliveryAddress').value)
+
   console.log("submitting")
 
   event.preventDefault();

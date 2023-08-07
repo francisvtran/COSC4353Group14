@@ -8,7 +8,30 @@ const password2 = document.getElementById('password2');
 form.addEventListener('submit', e => {
     e.preventDefault();
     //enterData();
-    validateInputs();
+    const validated = validateInputs();
+    if(validated) {
+        console.log("success");
+        const data = {
+            username: username.value,
+            email: email.value,
+            password: password.value
+        }
+
+        console.log(data);
+
+        fetch('http://localhost:3000/newUserRegister', {
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                window.location.href = "fuelquoteform.html";
+            })
+    }
 });
 
 const setError = (element, message) => {
@@ -42,30 +65,37 @@ const validateInputs = () => {
 
     if(usernameValue === '') {
         setError(username, 'Username is required');
+        return false;
     } else {
         setSuccess(username);
     }
 
     if(emailValue === '') {
         setError(email, 'Email is required');
+        return false;
     } else if (!isValidEmail(emailValue)) {
         setError(email, 'Provide a valid email address');
+        return false;
     } else {
         setSuccess(email);
     }
 
     if(passwordValue === '') {
         setError(password, 'Password is required');
+        return false;
     } else if (passwordValue.length < 8 ) {
         setError(password, 'Password must be at least 8 character.')
+        return false;
     } else {
         setSuccess(password);
     }
 
     if(password2Value === '') {
         setError(password2, 'Please confirm your password');
+        return false;
     } else if (password2Value !== passwordValue) {
         setError(password2, "Passwords doesn't match");
+        return false;
     } else {
         setSuccess(password2);
     }
@@ -80,4 +110,6 @@ const validateInputs = () => {
         // submit the form
         form.submit();
         }
+        
+        return true;
       };
